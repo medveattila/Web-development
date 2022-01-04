@@ -1,4 +1,4 @@
-This is the reopsitory for web development project.
+This is the reopsitory for web development projects.
 
 Tic-tac-toe: This is a 2-player tic-tac-toe game that can be played in the browser. Written with html, css and javascript.
 
