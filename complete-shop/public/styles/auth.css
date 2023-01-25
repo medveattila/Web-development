@@ -1,0 +1,22 @@
+h1 {
+    text-align: center;
+    color: var(--color-gray-300); /*ha egymás után vannak linkelve a css fájlok, az előbbiben definiált css változók itt is működnek*/
+}
+
+form {
+    max-width: 25rem;
+    margin: var(--space-8) auto;
+    padding: var(--space-4);
+    background-color: var(--color-gray-600);
+    border-radius: var(--border-radius-medium);
+    text-align: center; /*Ez az inline elementeket teszi középre (label és az input element az!)*/
+}
+
+form a { /*így a form-on belüli 'a' elementekre hatunk*/
+    color: var(--color-primary-200);
+}
+
+form a:hover,
+form a:active {
+    color: var(--color-primary-400);
+}

@@ -1,0 +1,29 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Login' }) %> <!-- ha <.%- %>: nincs escapelve a kód hanem lefut-->
+<link rel="stylesheet" href="/styles/forms.css"> <!--a rész specifikus css fájlokat az adott részben külön linkeljük, hogy ne kelljen mindig az egészet lekérni-->
+<link rel="stylesheet" href="/styles/auth.css"> <!--számít a sorrend, a forms.css felülírja a base.css-t, a auth.css pedig a forms.css-t (ha ua dolgokra hattatjuk)-->
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+        <h1>Log in</h1>
+        <% if (inputData.errorMessage) { %> <!--az inputdata a beadott object-->
+            <section class="alert">
+                <h2>Invalid Credentials!</h2>
+                <p><%= inputData.errorMessage %></p>
+            </section>
+        <% } %> 
+        <form action="/login" method="POST">
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            <p>
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email" value="<%= inputData.email %>" required>
+            </p>
+            <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" value="<%= inputData.password %>" required>
+            </p>
+            <button class="btn">Login</button> <!--a button tud post requestet küldeni, az 'a' nem-->
+            <p id="switch-form"><a href="/signup">Create a new user</a></p>
+        </form>
+    </main>
+<%- include('../../shared/includes/footer') %>

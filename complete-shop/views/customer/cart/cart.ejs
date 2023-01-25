@@ -1,0 +1,32 @@
+<%- include('../../shared/includes/head', { pageTitle: 'Your Cart' }) %><!-- ha <.%- %>: nincs escapelve a kód hanem lefut-->
+<link rel="stylesheet" href="/styles/cart.css">
+<script src="/scripts/cart-item-management.js" defer></script>
+</head>
+<body>
+    <%- include('../../shared/includes/header') %>
+    <main>
+        <h1>Your Cart</h1>
+        <ul id="cart-items">
+            <% for (const cartItem of locals.cart.items) { %> 
+            <li>
+                <%- include('includes/cart-item', {item: cartItem}) %> 
+            </li>
+            <% } %> 
+        </ul>
+        <div id="cart-total">
+            <p>Total: $ <span id="cart-total-price"><%= locals.cart.totalPrice.toFixed(2) %></span> </p> <!--toFixed() - meghatározott tizedesig kererkíti a számot (built in)-->
+
+            <% if (locals.isAuth && locals.cart.totalQuantity > 0) { %> <!--csak akkor látszódjon a buy gomb, ha be vagyunk logolva-->
+                <form action="/orders" method="POST"> <!--egy post requestet küldünk, hogy létrejöjjön a rendelés-->
+                    <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+                    <button class="btn">Buy Products</button>
+                </form>
+            <% } else if (locals.isAuth && locals.cart.totalQuantity === 0)  { %> 
+                <p id="cart-total-fallback">Add items to the cart to proceed and purchase the items.</p>
+            <% } else { %>
+                <p id="cart-total-fallback">Log in to proceed and purchase items.</p>
+            <% } %>  
+        </div>
+        
+    </main>
+<%- include('../../shared/includes/footer') %>
